@@ -1,0 +1,21 @@
+*.egg-info
+*.pot
+*.py[co]
+.tox/
+__pycache__
+MANIFEST
+dist/
+docs/_build/
+docs/locale/
+node_modules/
+tests/coverage_html/
+tests/.coverage
+build/
+tests/report/
+
+# https://stackoverflow.com/a/54693364/4120414
+*.DS_Store
+**/__pycache__
+**/.DS_Store
+**/migrations
+db.sqlite3
