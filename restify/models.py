@@ -1,23 +1,17 @@
-from pyexpat import model
-from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import VetUserManager
-
 
 class Vets(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 
-
 class Specialties(models.Model):
     name = models.CharField(max_length=80)
-
 
 class VetSpecialties(models.Model):
     vet_id = models.ForeignKey(Vets, on_delete=models.CASCADE)
     specialty_id = models.ForeignKey(Specialties, on_delete=models.CASCADE)
-
 
 class Owners(models.Model):
     first_name = models.CharField(max_length=30)
