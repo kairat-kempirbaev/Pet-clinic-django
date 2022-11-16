@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     "restify",
-    'rest_framework'
+    'rest_framework',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -79,9 +80,9 @@ WSGI_APPLICATION = 'pet_clinic.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': os.environ['db_name'],
+        'USER': os.environ['db_name'],
+        'PASSWORD': os.environ['db_pass'],
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -135,4 +136,9 @@ AUTH_USER_MODEL = 'restify.Users'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
+}
+
+#Alternative to Django Rest Framework
+GRAPHENE = {
+    'SCHEMA': 'restify.schema.schema' # Where your Graphene schema lives
 }
