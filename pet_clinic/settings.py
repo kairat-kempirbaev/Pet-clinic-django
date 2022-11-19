@@ -23,13 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['django_secret']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['django_debug']
+DEBUG = eval(os.environ['django_debug'])
 
-ALLOWED_HOSTS = [os.environ['django_hosts']]
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ['django_hosts']]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -138,7 +136,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-#Alternative to Django Rest Framework
+# Alternative to Django Rest Framework
 GRAPHENE = {
-    'SCHEMA': 'restify.schema.schema' # Where your Graphene schema lives
+    'SCHEMA': 'restify.schema.schema'  # Where your Graphene schema lives
 }
+
+if (eval(os.environ['django_secure'])):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
