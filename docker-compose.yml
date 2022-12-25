@@ -15,12 +15,16 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - .:/code:consistent
     ports:
       - "8000:8000"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - DJANGO_SECRET=!@$&^*($234967weruifl:"|}{`kgfj;lKJVNXCM<>JKSLEUIR3458345IOUPSDF::|L"E}W{#*(@$&%#+
+      - DJANGO_DEBUG=False
+      - DJANGO_HOSTS=*
+      - DJANGO_SECURE=False
     depends_on:
       - db

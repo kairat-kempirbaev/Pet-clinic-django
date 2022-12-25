@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['django_secret']
+SECRET_KEY = os.environ['DJANGO_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = eval(os.environ['django_debug'])
+DEBUG = eval(os.environ['DJANGO_DEBUG'])
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ['django_hosts']]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ['DJANGO_HOSTS']]
 
 # Application definition
 INSTALLED_APPS = [
@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'pet_clinic.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['db_name'],
-        'USER': os.environ['db_name'],
-        'PASSWORD': os.environ['db_pass'],
-        'HOST': '127.0.0.1',
+        'NAME': os.environ['POSTGRES_NAME'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -105,6 +105,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+# New user model specific for pet_clinic
+AUTH_USER_MODEL = 'restify.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -128,8 +137,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# New user model specific for pet_clinic
-AUTH_USER_MODEL = 'restify.Users'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -141,7 +149,7 @@ GRAPHENE = {
     'SCHEMA': 'restify.schema.schema'  # Where your Graphene schema lives
 }
 
-if (eval(os.environ['django_secure'])):
+if (eval(os.environ['DJANGO_SECURE'])):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
