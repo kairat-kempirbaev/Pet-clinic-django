@@ -20,3 +20,5 @@ tests/report/
 **/migrations
 db.sqlite3
 data
+
+static/
