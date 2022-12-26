@@ -17,7 +17,7 @@ tests/report/
 *.DS_Store
 **/__pycache__
 **/.DS_Store
-**/migrations
+
 db.sqlite3
 data
 
