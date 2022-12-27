@@ -1,45 +1,44 @@
 from graphene_django import DjangoObjectType
-from .models import Employee, Owner, Pet, Specialty, Type, User, Visit
-
+from .models import *
+import graphene
 
 class UserType(DjangoObjectType):
     class Meta:
         model = User
-        fields = ("id", "first_name", "last_name",
-                  "address", "city", "telephone")
-
-
-class SpecialtiesType(DjangoObjectType):
-    class Meta:
-        model = Specialty
-        fields = ("id", "name")
 
 
 class PetClassType(DjangoObjectType):
     class Meta:
         model = Type
-        fields = ("id", "name",)
 
 
 class PetType(DjangoObjectType):
     class Meta:
         model = Pet
-        fields = ("id", "pets")
 
 
 class OwnersType(DjangoObjectType):
     class Meta:
         model = Owner
-        fields = ("id", "pets")
 
+class SpecialtyType(DjangoObjectType):
+    class Meta:
+        model = Specialty
 
 class EmployeeType(DjangoObjectType):
     class Meta:
         model = Employee
-        fields = ("user", "specialities")
 
 
 class VisitType(DjangoObjectType):
     class Meta:
         model = Visit
-        fields = ("id", "pet", "owner", "visit_date", "description")
+
+
+class Query(graphene.ObjectType):
+    users = graphene.List(UserType)
+
+    def resolve_users(self, info):
+        return User.objects.all()
+
+schema = graphene.Schema(query=Query)

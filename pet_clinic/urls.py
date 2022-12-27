@@ -21,7 +21,7 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('restify.urls')),
     path('admin/', admin.site.urls)
-]
+] 
 
 
 if settings.DEBUG:

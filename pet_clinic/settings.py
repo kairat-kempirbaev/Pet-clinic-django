@@ -144,7 +144,7 @@ REST_FRAMEWORK = {
 
 # Alternative to Django Rest Framework
 GRAPHENE = {
-    'SCHEMA': 'restify.schema.schema'  # Where your Graphene schema lives
+    'SCHEMA': 'restify.schema.schema'
 }
 
 if (eval(os.environ['DJANGO_SECURE'])):

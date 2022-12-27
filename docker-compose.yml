@@ -23,7 +23,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - DJANGO_SECRET=!@$&^*($234967weruifl:"|}{`kgfj;lKJVNXCM<>JKSLEUIR3458345IOUPSDF::|L"E}W{#*(@$&%#+
-      - DJANGO_DEBUG=False
+      - DJANGO_DEBUG=True
       - DJANGO_HOSTS=*
       - DJANGO_SECURE=False
     depends_on:
